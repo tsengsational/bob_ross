@@ -15,7 +15,7 @@ values_2 = @@transform.each_with_object([]) { |row, arr| arr << "(#{row[:episode
 
 @@insert_2 = "INSERT INTO episodes (episode_number, title, season_id) VALUES #{values_2};"
 
-values_3 = @@transform[0].keys.pop(@@transform[0].keys.size - 2).map {|element| "(#{element})"}.join(", ")
+values_3 = @@transform[0].keys.pop(@@transform[0].keys.size - 2).map {|element| "('#{element}')"}.join(", ")
 
 @@insert_3 = "INSERT INTO elements (element) VALUES #{values_3};"
 
