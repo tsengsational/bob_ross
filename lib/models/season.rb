@@ -54,6 +54,38 @@ class Season
     end
   end
 
+  def self.find(season:)
+    sql = <<-SQL
+    SELECT *
+    FROM seasons
+    WHERE season = ?
+    SQL
+
+    season = DB[:conn].execute(sql, season).flatten
+    binding.pry
+    new_season = Season.new(season[1], season[0])
+  end
+
+  def destroy
+    sql = <<-SQL
+    DELETE
+    FROM seasons
+    WHERE id = ?
+    SQL
+
+    DB[:conn].execute(sql, self.id)
+  end
+
+  def update
+    sql = <<-SQL
+    UPDATE seasons
+    SET season = ?
+    WHERE id = ?
+    SQL
+
+    DB[:conn].execute(sql, self.season, self.id)
+  end
+
 end
 
-Pry.start
+#Pry.start
